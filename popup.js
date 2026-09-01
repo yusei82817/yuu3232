@@ -1,6 +1,6 @@
 const STORAGE_KEY = "excludedDomains";
 const SPATIAL_AUDIO_KEY = "spatialAudioEnabled";
-const AUDIO_MODE_KEY = "spatialAudioMode";
+const SPATIAL_AUDIO_MODE_KEY = "spatialAudioMode";
 
 const domainList = document.getElementById("domainList");
 const emptyMessage = document.getElementById("emptyMessage");
@@ -36,23 +36,23 @@ async function saveDomains(domains) {
   await chrome.storage.local.set({ [STORAGE_KEY]: domains });
 }
 
-async function loadAudioSettings() {
+async function loadSpatialAudioSetting() {
   const result = await chrome.storage.local.get([
     SPATIAL_AUDIO_KEY,
-    AUDIO_MODE_KEY
+    SPATIAL_AUDIO_MODE_KEY
   ]);
 
   const enabled = result[SPATIAL_AUDIO_KEY] === true;
-  const mode = ["3d", "8d-left", "8d-right", "8d-dual"].includes(result[AUDIO_MODE_KEY])
-    ? result[AUDIO_MODE_KEY]
-    : "8d-dual";
+  const mode = ["3d", "8d-left", "8d-right", "8d-dual"].includes(result[SPATIAL_AUDIO_MODE_KEY])
+    ? result[SPATIAL_AUDIO_MODE_KEY]
+    : "3d";
 
   spatialAudioToggle.checked = enabled;
   audioMode.value = mode;
-  updateAudioSettingsUI(enabled);
+  updateSpatialAudioUI(enabled);
 }
 
-function updateAudioSettingsUI(enabled) {
+function updateSpatialAudioUI(enabled) {
   spatialAudioState.textContent = enabled ? "ON" : "OFF";
   audioModeOptions.hidden = !enabled;
 }
@@ -136,12 +136,14 @@ domainInput.addEventListener("keydown", event => {
 
 spatialAudioToggle.addEventListener("change", async () => {
   const enabled = spatialAudioToggle.checked;
+  updateSpatialAudioUI(enabled);
   await chrome.storage.local.set({ [SPATIAL_AUDIO_KEY]: enabled });
-  updateAudioSettingsUI(enabled);
 });
 
 audioMode.addEventListener("change", async () => {
-  await chrome.storage.local.set({ [AUDIO_MODE_KEY]: audioMode.value });
+  await chrome.storage.local.set({
+    [SPATIAL_AUDIO_MODE_KEY]: audioMode.value
+  });
 });
 
 playerTabButton.addEventListener("click", () => {
@@ -149,4 +151,4 @@ playerTabButton.addEventListener("click", () => {
 });
 
 renderDomains();
-loadAudioSettings();
+loadSpatialAudioSetting();
