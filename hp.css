@@ -1,0 +1,54 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 64px;
+}
+
+body {
+  margin: 0;
+  background: #000;
+  color: #39ff14;
+  font-family: Arial, sans-serif;
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 1px solid #39ff14;
+  background: rgba(0, 0, 0, 0.95);
+}
+
+.site-header nav {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  padding: 16px;
+}
+
+.site-header a {
+  color: #39ff14;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.site-header a:hover {
+  text-shadow: 0 0 8px #39ff14;
+}
+
+.page-section {
+  min-height: 100vh;
+  padding: 80px 24px;
+}
+
+.page-section h1 {
+  margin-top: 0;
+  font-size: 32px;
+}
+
+.page-section p {
+  font-size: 16px;
+}
