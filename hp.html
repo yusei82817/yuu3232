@@ -7,6 +7,9 @@
   <link rel="stylesheet" href="hp.css">
 </head>
 <body>
+  <canvas id="factoryCanvas" aria-hidden="true"></canvas>
+  <div class="factory-overlay" aria-hidden="true"></div>
+
   <header class="site-header">
     <nav aria-label="メインナビゲーション">
       <a href="#about">about</a>
@@ -16,14 +19,20 @@
 
   <main>
     <section id="about" class="page-section">
-      <h1>about</h1>
-      <p>この拡張機能について。</p>
+      <div class="content-panel">
+        <h1>about</h1>
+        <p>この拡張機能について。</p>
+      </div>
     </section>
 
     <section id="project" class="page-section">
-      <h1>project</h1>
-      <p>プロジェクトについて。</p>
+      <div class="content-panel">
+        <h1>project</h1>
+        <p>プロジェクトについて。</p>
+      </div>
     </section>
   </main>
+
+  <script src="hp.js"></script>
 </body>
 </html>
