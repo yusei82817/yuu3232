@@ -1,0 +1,11 @@
+{
+  "manifest_version": 3,
+  "name": "検索結果ドメイン排除",
+  "version": "1.0.0",
+  "description": "",
+  "permissions": [],
+  "content_scripts": [],
+  "action": {
+    "default_title": "検索結果ドメイン排除"
+  }
+}
