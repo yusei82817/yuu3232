@@ -109,6 +109,33 @@ button:hover {
   font-size: 11px;
 }
 
+.spatial-audio-section {
+  margin-bottom: 12px;
+}
+
+.toggle-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  padding: 9px 10px;
+  border: 1px solid #39ff14;
+  cursor: pointer;
+}
+
+#spatialAudioToggle {
+  width: 18px;
+  height: 18px;
+  margin: 0 0 0 auto;
+  accent-color: #39ff14;
+}
+
+#spatialAudioState {
+  min-width: 28px;
+  font-weight: bold;
+  text-align: right;
+}
+
 .player-tab-button {
   width: 100%;
   margin-top: 4px;
