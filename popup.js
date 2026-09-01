@@ -1,5 +1,6 @@
 const STORAGE_KEY = "excludedDomains";
 const SPATIAL_AUDIO_KEY = "spatialAudioEnabled";
+const AUDIO_MODE_KEY = "spatialAudioMode";
 
 const domainList = document.getElementById("domainList");
 const emptyMessage = document.getElementById("emptyMessage");
@@ -9,6 +10,8 @@ const removeButton = document.getElementById("removeButton");
 const playerTabButton = document.getElementById("playerTabButton");
 const spatialAudioToggle = document.getElementById("spatialAudioToggle");
 const spatialAudioState = document.getElementById("spatialAudioState");
+const audioModeOptions = document.getElementById("audioModeOptions");
+const audioMode = document.getElementById("audioMode");
 const status = document.getElementById("status");
 
 function normalizeDomain(value) {
@@ -33,15 +36,25 @@ async function saveDomains(domains) {
   await chrome.storage.local.set({ [STORAGE_KEY]: domains });
 }
 
-async function loadSpatialAudioSetting() {
-  const result = await chrome.storage.local.get(SPATIAL_AUDIO_KEY);
+async function loadAudioSettings() {
+  const result = await chrome.storage.local.get([
+    SPATIAL_AUDIO_KEY,
+    AUDIO_MODE_KEY
+  ]);
+
   const enabled = result[SPATIAL_AUDIO_KEY] === true;
+  const mode = ["3d", "8d-left", "8d-right", "8d-dual"].includes(result[AUDIO_MODE_KEY])
+    ? result[AUDIO_MODE_KEY]
+    : "8d-dual";
+
   spatialAudioToggle.checked = enabled;
-  updateSpatialAudioLabel(enabled);
+  audioMode.value = mode;
+  updateAudioSettingsUI(enabled);
 }
 
-function updateSpatialAudioLabel(enabled) {
+function updateAudioSettingsUI(enabled) {
   spatialAudioState.textContent = enabled ? "ON" : "OFF";
+  audioModeOptions.hidden = !enabled;
 }
 
 function showStatus(message) {
@@ -124,7 +137,11 @@ domainInput.addEventListener("keydown", event => {
 spatialAudioToggle.addEventListener("change", async () => {
   const enabled = spatialAudioToggle.checked;
   await chrome.storage.local.set({ [SPATIAL_AUDIO_KEY]: enabled });
-  updateSpatialAudioLabel(enabled);
+  updateAudioSettingsUI(enabled);
+});
+
+audioMode.addEventListener("change", async () => {
+  await chrome.storage.local.set({ [AUDIO_MODE_KEY]: audioMode.value });
 });
 
 playerTabButton.addEventListener("click", () => {
@@ -132,4 +149,4 @@ playerTabButton.addEventListener("click", () => {
 });
 
 renderDomains();
-loadSpatialAudioSetting();
+loadAudioSettings();
