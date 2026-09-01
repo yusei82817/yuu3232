@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>プレイヤータブ</title>
+  <link rel="stylesheet" href="player.css">
+</head>
+<body>
+  <main class="player">
+    <h1>プレイヤータブ</h1>
+
+    <section class="player-panel">
+      <h2>オーディオプレイヤー</h2>
+      <label for="audioFile">オーディオファイル選択</label>
+      <input id="audioFile" type="file" accept="audio/*">
+      <audio id="audioPlayer" controls preload="metadata"></audio>
+      <p id="fileName">ファイルが選択されていません。</p>
+    </section>
+  </main>
+  <script src="player.js"></script>
+</body>
+</html>
