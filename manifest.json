@@ -2,10 +2,19 @@
   "manifest_version": 3,
   "name": "検索結果ドメイン排除",
   "version": "1.0.0",
-  "description": "",
-  "permissions": [],
-  "content_scripts": [],
+  "description": "検索結果から指定ドメインを排除し、ページ表示をカスタマイズする拡張機能です。",
+  "permissions": ["storage"],
+  "host_permissions": ["<all_urls>"],
   "action": {
-    "default_title": "検索結果ドメイン排除"
-  }
+    "default_title": "検索結果ドメイン排除",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "css": ["content.css"],
+      "run_at": "document_start"
+    }
+  ]
 }
