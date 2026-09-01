@@ -1,4 +1,5 @@
 const STORAGE_KEY = "excludedDomains";
+const SPATIAL_AUDIO_KEY = "spatialAudioEnabled";
 
 const domainList = document.getElementById("domainList");
 const emptyMessage = document.getElementById("emptyMessage");
@@ -6,6 +7,8 @@ const domainInput = document.getElementById("domainInput");
 const addButton = document.getElementById("addButton");
 const removeButton = document.getElementById("removeButton");
 const playerTabButton = document.getElementById("playerTabButton");
+const spatialAudioToggle = document.getElementById("spatialAudioToggle");
+const spatialAudioState = document.getElementById("spatialAudioState");
 const status = document.getElementById("status");
 
 function normalizeDomain(value) {
@@ -28,6 +31,17 @@ async function getDomains() {
 
 async function saveDomains(domains) {
   await chrome.storage.local.set({ [STORAGE_KEY]: domains });
+}
+
+async function loadSpatialAudioSetting() {
+  const result = await chrome.storage.local.get(SPATIAL_AUDIO_KEY);
+  const enabled = result[SPATIAL_AUDIO_KEY] === true;
+  spatialAudioToggle.checked = enabled;
+  updateSpatialAudioLabel(enabled);
+}
+
+function updateSpatialAudioLabel(enabled) {
+  spatialAudioState.textContent = enabled ? "ON" : "OFF";
 }
 
 function showStatus(message) {
@@ -107,8 +121,15 @@ domainInput.addEventListener("keydown", event => {
   if (event.key === "Enter") addButton.click();
 });
 
+spatialAudioToggle.addEventListener("change", async () => {
+  const enabled = spatialAudioToggle.checked;
+  await chrome.storage.local.set({ [SPATIAL_AUDIO_KEY]: enabled });
+  updateSpatialAudioLabel(enabled);
+});
+
 playerTabButton.addEventListener("click", () => {
   chrome.tabs.create({ url: chrome.runtime.getURL("player.html") });
 });
 
 renderDomains();
+loadSpatialAudioSetting();
