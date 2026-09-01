@@ -26,13 +26,27 @@
       <p id="status" role="status"></p>
     </section>
 
-    <section class="spatial-audio-section">
+    <section class="audio-settings">
       <h2>音声設定</h2>
-      <label class="toggle-row" for="spatialAudioToggle">
-        <span>立体音響</span>
-        <input id="spatialAudioToggle" type="checkbox">
+
+      <div class="audio-mode">
+        <span class="audio-mode-title">立体音響</span>
+        <label class="switch" for="spatialAudioToggle">
+          <input id="spatialAudioToggle" type="checkbox">
+          <span class="slider" aria-hidden="true"></span>
+        </label>
         <span id="spatialAudioState">OFF</span>
-      </label>
+      </div>
+
+      <div id="audioModeOptions" class="audio-mode-options" hidden>
+        <label for="audioMode">立体音響モード</label>
+        <select id="audioMode">
+          <option value="3d">3D</option>
+          <option value="8d-left">8D 左回り</option>
+          <option value="8d-right">8D 右回り</option>
+          <option value="8d-dual">8D Dual（左右逆回転）</option>
+        </select>
+      </div>
     </section>
 
     <button id="playerTabButton" class="player-tab-button" type="button">プレイヤータブ表示</button>
