@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>検索結果ドメイン排除</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <main class="popup">
+    <h1>検索結果ドメイン排除</h1>
+
+    <section>
+      <h2>排除するドメインリスト</h2>
+      <ul id="domainList" aria-live="polite"></ul>
+      <p id="emptyMessage">登録されているドメインはありません。</p>
+    </section>
+
+    <section>
+      <label for="domainInput">追加する排除ドメイン</label>
+      <input id="domainInput" type="text" placeholder="example.com" autocomplete="off">
+      <div class="buttons">
+        <button id="addButton" type="button">排除決定</button>
+        <button id="removeButton" type="button">排除撤回</button>
+      </div>
+      <p id="status" role="status"></p>
+    </section>
+  </main>
+  <script src="popup.js"></script>
+</body>
+</html>
