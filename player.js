@@ -1,11 +1,11 @@
-const audioFile = document.getElementById("audioFile");
-const audioPlayer = document.getElementById("audioPlayer");
+const videoFile = document.getElementById("videoFile");
+const videoPlayer = document.getElementById("videoPlayer");
 const fileName = document.getElementById("fileName");
 
 let currentObjectUrl = null;
 
-audioFile.addEventListener("change", () => {
-  const file = audioFile.files?.[0];
+videoFile.addEventListener("change", () => {
+  const file = videoFile.files?.[0];
   if (!file) return;
 
   if (currentObjectUrl) {
@@ -13,8 +13,8 @@ audioFile.addEventListener("change", () => {
   }
 
   currentObjectUrl = URL.createObjectURL(file);
-  audioPlayer.src = currentObjectUrl;
-  audioPlayer.load();
+  videoPlayer.src = currentObjectUrl;
+  videoPlayer.load();
   fileName.textContent = `選択中: ${file.name}`;
 });
 
