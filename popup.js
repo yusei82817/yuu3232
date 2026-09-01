@@ -5,6 +5,7 @@ const emptyMessage = document.getElementById("emptyMessage");
 const domainInput = document.getElementById("domainInput");
 const addButton = document.getElementById("addButton");
 const removeButton = document.getElementById("removeButton");
+const playerTabButton = document.getElementById("playerTabButton");
 const status = document.getElementById("status");
 
 function normalizeDomain(value) {
@@ -104,6 +105,10 @@ removeButton.addEventListener("click", async () => {
 
 domainInput.addEventListener("keydown", event => {
   if (event.key === "Enter") addButton.click();
+});
+
+playerTabButton.addEventListener("click", () => {
+  chrome.tabs.create({ url: chrome.runtime.getURL("player.html") });
 });
 
 renderDomains();
