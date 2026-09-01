@@ -1,3 +1,17 @@
+/* 検索結果ドメイン排除: ページ全体の背景 */
+html,
+body {
+  background: #000 !important;
+}
+
+/* <box> の外側にある見出し・段落だけをネオングリーンにする */
+h1:not(box h1),
+h2:not(box h2),
+p:not(box p) {
+  color: #39ff14 !important;
+}
+
+/* オーディオプレイヤー本体のスタイルはShadow DOM側で管理 */
 #search-domain-exclusion-player {
   all: initial;
 }
